@@ -1,0 +1,84 @@
+.inputContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; 
+}
+
+.buttonDeputados {
+    margin-left: 10px;
+}
+
+.cardGridContainer {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-around; 
+    margin-top: 50px;
+}
+
+.selectedCard {
+    border: 2px solid #006400; 
+  }
+
+.informacoesExtras {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.listaDespesas {
+    list-style-type: none;
+    padding: 0;
+    transition: background-color 0.3s ease;
+    color: #006400;
+    font-weight: bold; 
+}
+
+.listaDespesas li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc; 
+}
+.listaDespesas li:hover {
+    background-color: #f0f0f0; 
+}
+
+.mandatosExternos {
+    list-style-type: none;
+    padding: 0;
+    transition: background-color 0.3s ease;
+    margin-left: 50px;
+    color: #006400;
+}
+
+.mandatosExternos li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc; 
+}
+
+.mandatosExternos li:hover {
+    background-color: #f0f0f0; 
+}
+
+.inputContainer {
+    display: flex;
+    border-radius: 5px;
+    color: #006400;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+.searchIcon {
+    color: #006400;
+    background-color: white;
+}
+
+.inputField {
+    font-size: 16px;
+    color: #006400;
+}
