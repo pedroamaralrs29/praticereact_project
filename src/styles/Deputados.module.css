@@ -82,3 +82,15 @@
     font-size: 16px;
     color: #006400;
 }
+
+.loadingContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .loadingIcon {
+    color: #006400; /* Cor verde, você pode ajustar conforme necessário */
+    font-size: 36px; /* Tamanho do ícone, você pode ajustar conforme necessário */
+  }
