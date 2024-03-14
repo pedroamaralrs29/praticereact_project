@@ -144,7 +144,7 @@ const Deputados = () => {
                                 E-mail: {deputado.email}
                             </Typography>
                         </CardContent>
-                        <Button onClick={() => setOpenModal(true)}>Open modal</Button>
+                        <Button sx={{color:'#006400'}} onClick={() => setOpenModal(true)}>Mais informações</Button>
                         <Modal
                         open={openModal}
                         onClose={() => setOpenModal(false)}
