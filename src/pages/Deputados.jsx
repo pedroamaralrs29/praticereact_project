@@ -13,6 +13,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 import styles from '../styles/Deputados.module.css';
 import { useState } from 'react';
+import { Box, Modal } from '@mui/material';
 
 const Deputados = () => {
     const [deputados, setDeputados] = useState([]);
@@ -22,6 +23,7 @@ const Deputados = () => {
     const [selectedDeputadoId, setSelectedDeputadoId] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [openModal, setOpenModal] =useState(false)
 
     const handleSearch = async () => {
         try {
@@ -142,41 +144,65 @@ const Deputados = () => {
                                 E-mail: {deputado.email}
                             </Typography>
                         </CardContent>
+                        <Button onClick={() => setOpenModal(true)}>Open modal</Button>
+                        <Modal
+                        open={openModal}
+                        onClose={() => setOpenModal(false)}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                        >
+                        <Box sx={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            bgcolor: 'background.paper',
+                            boxShadow: 24,
+                            borderRadius: 4,
+                            p: 4,
+                            maxWidth: 600,
+                            width: '80%',
+                            maxHeight: 500,
+                            overflowY: 'auto',
+                        }}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                            {despesas.length > 0 && selectedDeputadoId && (
+                                <ul className={styles.listaDespesas}>
+                                    <h2>Lista de despesas do deputado selecionado</h2>
+                                    {despesas.map((despesa) => (
+                                        <li key={despesa.codDocumento}>{despesa.nomeFornecedor}
+                                            <p> R$ {despesa.valorDocumento.toFixed(2)}</p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                            {!isLoading && despesas.length === 0 && selectedDeputadoId && (
+                                <p>Nenhuma despesa encontrada para este deputado.</p>
+                            )}
+                            </Typography>
+                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                            {mandatosExternos.length > 0 && selectedDeputadoId && (
+                            <ul className={styles.mandatosExternos}>
+                                <h2> Lista de mandatos externos do Deputado: </h2>
+                                {mandatosExternos.map((mandatoExterno) => (
+                                    <li key={mandatoExterno.id}> {mandatoExterno.cargo} {mandatoExterno.anoInicio} / {mandatoExterno.anoFim}</li>
+                                ))}
+                            </ul>
+                        )}
+
+                        {!isLoading && mandatosExternos.length === 0 && selectedDeputadoId && (
+                            <ul className={styles.mandatosExternos}>
+                                <h2> Lista de mandatos externos do Deputado: </h2>
+                                <li> Este deputado não possui mandatos anteriores </li>
+                            </ul>
+                        )}
+                            </Typography>
+                        </Box>
+                        </Modal>
                     </Card>
                     </Grid>
                 ))}
             </Grid>
-            <div className={styles.informacoesExtras}>
-                {despesas.length > 0 && selectedDeputadoId && (
-                    <ul className={styles.listaDespesas}>
-                        <h2>Lista de despesas do deputado selecionado</h2>
-                        {despesas.map((despesa) => (
-                            <li key={despesa.codDocumento}>{despesa.nomeFornecedor}
-                                <p> R$ {despesa.valorDocumento.toFixed(2)}</p>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-                {!isLoading && despesas.length === 0 && selectedDeputadoId && (
-                    <p>Nenhuma despesa encontrada para este deputado.</p>
-                )}
-
-                {mandatosExternos.length > 0 && selectedDeputadoId && (
-                    <ul className={styles.mandatosExternos}>
-                        <h2> Lista de mandatos externos do Deputado: </h2>
-                        {mandatosExternos.map((mandatoExterno) => (
-                            <li key={mandatoExterno.id}> {mandatoExterno.cargo} {mandatoExterno.anoInicio} / {mandatoExterno.anoFim}</li>
-                        ))}
-                    </ul>
-                )}
-
-                {!isLoading && mandatosExternos.length === 0 && selectedDeputadoId && (
-                    <ul className={styles.mandatosExternos}>
-                        <h2> Lista de mandatos externos do Deputado: </h2>
-                        <li> Este deputado não possui mandatos anteriores </li>
-                    </ul>
-                )}
-            </div>
         </>
     );
 }
